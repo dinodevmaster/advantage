@@ -1,0 +1,13 @@
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div *ngFor="let user of users" class="card card-body mb-2">
+        <ul class="text-center">
+          <li>{{user.fullName}}</li>
+          <li>{{user.birthdate}}</li>
+          <li>{{user.email}}</li>
+          <li>{{user.telephone}}</li>
+          <li><img [src]="user.sign" alt="firma" class="card-img w-50"></li>
+        </ul>
+    </div>
+  </div>
+</div>
