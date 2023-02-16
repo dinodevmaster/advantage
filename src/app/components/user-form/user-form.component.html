@@ -6,24 +6,38 @@
       </h3>
     </div>
     <div class="card card-body">
-      <form (submit)="submitUser()">
+      <form [formGroup]="userForm" (ngSubmit)="submitUser()">
         <div class="form-group mb-3">
-          <input type="text" name="fullName" [(ngModel)]="user.fullName" class="form-control" placeholder="Nombre" autofocus>
+          <input type="text" name="fullName" formControlName="fullName" class="form-control" placeholder="Nombre" required>
+          <div *ngIf="userForm.get('fullName')?.touched && userForm.get('fullName')?.errors?.['required']" class="alert alert-danger p-1">El campo nombre es requerido.</div>
         </div>
         <div class="form-group mb-3">
-          <input type="text" name="birthdate" [(ngModel)]="user.birthdate" class="form-control" placeholder="Fecha de nacimiento">
+          <input type="date" name="birthdate"formControlName="birthdate" class="form-control" placeholder="Fecha de nacimiento">
+          <div *ngIf="userForm.get('birthdate')?.touched && userForm.get('birthdate')?.errors?.['required']" class="alert alert-danger p-1">El campo fecha de nacimiento es requerido.</div>
         </div>
         <div class="form-group mb-3">
-          <input type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email">
+          <input type="email" name="email" formControlName="email" class="form-control" placeholder="Email">
+          <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.errors?.['required']" class="alert alert-danger p-1">El campo email es requerido.</div>
+          <div *ngIf="userForm.get('email')?.errors?.['email']" class="alert alert-danger p-1">El formato de email es incorrecto.</div>
         </div>
         <div class="form-group mb-3">
-          <input type="text" name="telephone" [(ngModel)]="user.telephone" class="form-control" placeholder="Teléfono">
+          <input type="text" name="telephone" formControlName="telephone" class="form-control" placeholder="Teléfono">
+          <div *ngIf="userForm.get('telephone')?.touched && userForm.get('telephone')?.errors?.['required']" class="alert alert-danger p-1">El campo teléfono es requerido.</div>
         </div>
-        <div class="form-group mb-3">
-          <input type="text" name="sign" [(ngModel)]="user.sign" class="form-control" placeholder="Firma">
+        <div class="form-group border mb-1">
+          <div id="signature-pad" class="m-signature-pad">
+            <div class="m-signature-pad-body"></div>
+              <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete()"></signature-pad>
+          </div>
+        </div>
+        <input type="hidden" name="sign" formControlName="sign" class="form-control" [(ngModel)]="signatureImg">
+        <div style="text-align: right;">
+          <button (click)="clearSignature()" class="btn btn-warning btn-sm mb-3">
+            Borrar Firma
+          </button>
         </div>
         <div class="text-center">
-          <button class="btn btn-primary mb-3">
+          <button (click)="savePad()" class="btn btn-success mb-3" [disabled]="userForm.invalid || !this.sign">
             Crear
           </button>
         </div>

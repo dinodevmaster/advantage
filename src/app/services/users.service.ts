@@ -16,7 +16,7 @@ export class UsersService {
     return this.httpClient.get<Users[]>(`${this.url}/users`)
   }
 
-  createUser(user: Users ){
+  createUser(user: Users){
     return this.httpClient.post<Users>(`${this.url}/users/create`, user);
   }
 

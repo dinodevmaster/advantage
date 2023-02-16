@@ -18,11 +18,8 @@ export class UsersListComponent implements OnInit{
     this.getUsers();
   }
 
-  async getUsers(){
+  getUsers(){
     this.usersService.getUsers()
-    .subscribe(res => {
-      console.log(typeof(res));
-        this.users = res
-    })
+    .subscribe(res => this.users = res)
   }
 }
