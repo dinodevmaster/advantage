@@ -10,7 +10,7 @@ export class UsersService {
 
   constructor(private readonly httpClient:HttpClient) { }
 
-  url: string = 'http://localhost:3000'
+  url: string = 'https://advantage-back-l2d8coybz-dinodevmaster.vercel.app'
 
   getUsers(): Observable<Users[]> {
     return this.httpClient.get<Users[]>(`${this.url}/users`)
