@@ -10,7 +10,7 @@ export class UsersService {
 
   constructor(private readonly httpClient:HttpClient) { }
 
-  url: string = 'https://advantageback-production.up.railway.app'
+  url: string = 'http://localhost:3000'
 
   getUsers(): Observable<Users[]> {
     return this.httpClient.get<Users[]>(`${this.url}/users`)
