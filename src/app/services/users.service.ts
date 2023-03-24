@@ -10,7 +10,7 @@ export class UsersService {
 
   constructor(private readonly httpClient:HttpClient) { }
 
-  url: string = 'https://advantage.onrender.com/'
+  url: string = 'https://advantage.onrender.com'
 
   getUsers(): Observable<Users[]> {
     return this.httpClient.get<Users[]>(`${this.url}/users`)
